@@ -140,8 +140,8 @@ func main() {
 	//define servers, this can be passed in as json or parameters through an API or read in from a database
 	//for now only 2 servers are defined
 	var fsServers []server
-	fsServers = append(fsServers, server{"208.76.55.72", 8021, "ClueCon", 10})
-	fsServers = append(fsServers, server{"208.76.55.73", 8021, "ClueCon", 10})
+	fsServers = append(fsServers, server{"2.1.1.1", 8021, "ClueCon", 10})
+	fsServers = append(fsServers, server{"2.1.1.3", 8021, "ClueCon", 10})
 
 	//sets the maximum number of operating system threads that can execute user-level Go code simultaneously
 	runtime.GOMAXPROCS(runtime.NumCPU())
