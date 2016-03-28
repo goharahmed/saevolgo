@@ -5,14 +5,16 @@ $db_connection = pg_connect("host=DBSERVERIP port=10432 dbname=kamailio user=kam
 
 $queue_name_joined=$_REQUEST["CC-Queue"];
 $event_function=$_REQUEST["Event-Calling-Function"];
-list($clientid,$queue_name)=split('_',$queue_name_joined);
+//list($clientid,$queue_name)=split('_',$queue_name_joined);
 
 
-$query="SELECT name,strategy,moh_sound,time_base_score,tier_rules_apply,tier_rule_wait_second,tier_rule_wait_multiply_level,tier_rule_no_agent_no_wait,discard_abandoned_after,abandoned_resume_allowed,max_wait_time,max_wait_time_with_no_agent,max_wait_time_with_no_agent_time_reached,record_template from queues where name='".$queue_name_joined."' AND clientid='".$clientid."';";
+$query="SELECT name,strategy,moh_sound,time_base_score,tier_rules_apply,tier_rule_wait_second,tier_rule_wait_multiply_level,tier_rule_no_agent_no_wait,discard_abandoned_after,abandoned_resume_allowed,max_wait_time,max_wait_time_with_no_agent,max_wait_time_with_no_agent_time_reached,record_template from queues where name='".$queue_name_joined."';";
 
 $result = pg_query($db_connection,$query);
 $resultArr = pg_fetch_assoc($result);
+
 if (!$resultArr) {
+// No Queue found with this Name - return Error to FreeSwitch
         header('Content-Type: text/xml');
         printf("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n");
         printf("<document type=\"freeswitch/xml\">\n");
